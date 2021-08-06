@@ -60,9 +60,6 @@ def find_word(char_list):
             #cursor=cursor+i
             cursor+=1
     return word_list
-            
-        
-    
 
 #char_list=req(10000, 97, 122)#в ASCII 97 - a, 122 - z
 #char_list=req(2000, 1072, 1103)#в ASCII 1072 - а, 1103 - я
@@ -81,4 +78,3 @@ pickle.dump(w_ls, f)
 f.close()
 #print(w_ls)
 #print(len(w_ls))
-

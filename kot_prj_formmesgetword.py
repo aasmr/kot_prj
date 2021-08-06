@@ -21,6 +21,8 @@ work e-mail: smirnov@bmstu.ru
 
 import os, re
 import numpy as np
+import enchant
+
 class calc_word:
     def __init__(self):
         self.word_dict={}
@@ -84,12 +86,45 @@ if __name__=='__main__':
 #     for i in calc.words:
 #         f.write(i+'\n')
 #     f.close()
-    f=open('word_dict_obscene.txt', 'r')
+    f=open('word_dict.txt', 'r')
     word_dict=f.read()
     f.close()
-    word_dict.split('\n')
+    word_dict=word_dict.split('\n')
     word_dict=np.unique(word_dict)
     f=open('word_dict.txt', 'w')
     for i in word_dict:
         f.write(i+'\n')
     f.close()
+    f=open('word_dict.txt', 'r')
+    word_dict=f.read()
+    f.close()
+    dict=enchant.Dict("ru_RU")
+    word_dict=word_dict.split('\n')
+    for i in word_dict:
+        if word_dict.index(i)<1273:
+            continue
+        if dict.check(i)==False:
+            print(i+'\n')
+            res=input()
+            if res=='x':
+                print(word_dict.index(i))
+                break
+            elif res=='rem':
+                word_dict.remove(i)
+                continue
+            elif res=='':
+                continue
+            else:
+                print(word_dict.index(i))
+                word_dict.remove(i)
+                i=res
+                word_dict.append(i)
+    f=open('word_dict.txt', 'w')
+    for i in word_dict:
+        f.write(i+'\n')
+    f.close()
+                
+    
+    
+    
+    
