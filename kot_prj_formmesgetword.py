@@ -86,15 +86,15 @@ if __name__=='__main__':
 #     for i in calc.words:
 #         f.write(i+'\n')
 #     f.close()
-    f=open('word_dict.txt', 'r')
-    word_dict=f.read()
-    f.close()
-    word_dict=word_dict.split('\n')
-    word_dict=np.unique(word_dict)
-    f=open('word_dict.txt', 'w')
-    for i in word_dict:
-        f.write(i+'\n')
-    f.close()
+#     f=open('word_dict.txt', 'r')
+#     word_dict=f.read()
+#     f.close()
+#     word_dict=word_dict.split('\n')
+#     word_dict=np.unique(word_dict)
+#     f=open('word_dict.txt', 'w')
+#     for i in word_dict:
+#         f.write(i+'\n')
+#     f.close()
     f=open('word_dict.txt', 'r')
     word_dict=f.read()
     f.close()
@@ -108,7 +108,7 @@ if __name__=='__main__':
     except:
         word_dict_new=[]
     for i in word_dict:
-        if word_dict.index(i)<4025 :
+        if word_dict.index(i)<7296 :
             continue
         if dict.check(i)==False:
             print(i+'\n')
