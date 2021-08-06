@@ -1,5 +1,5 @@
 '''
-Created on 5 авг. 2021 г.
+Created on 5 Р°РІРі. 2021 Рі.
 
 @author: Smirnov Alexey
 Laboratory Assistant
@@ -9,14 +9,14 @@ tg: @lelikbezbolika
 private e-mail: aasmr@ya.ru
 work e-mail: smirnov@bmstu.ru
 
-Разрешается свободное использование с ссылкой на источник
+Р Р°Р·СЂРµС€Р°РµС‚СЃСЏ СЃРІРѕР±РѕРґРЅРѕРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ СЃ СЃСЃС‹Р»РєРѕР№ РЅР° РёСЃС‚РѕС‡РЅРёРє
 '''
 
 '''
-Данный файл предназначен для полученния списка уникальных слов,
-используемых мной в переписке. Из списка будут удалены имена. Архив переписок в общем
-доступе не доступен не будет.
-Будет доступно два списка слов: содержащих обсценную лексику и цензурированный
+Р”Р°РЅРЅС‹Р№ С„Р°Р№Р» РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅ РґР»СЏ РїРѕР»СѓС‡РµРЅРЅРёСЏ СЃРїРёСЃРєР° СѓРЅРёРєР°Р»СЊРЅС‹С… СЃР»РѕРІ,
+РёСЃРїРѕР»СЊР·СѓРµРјС‹С… РјРЅРѕР№ РІ РїРµСЂРµРїРёСЃРєРµ. Р�Р· СЃРїРёСЃРєР° Р±СѓРґСѓС‚ СѓРґР°Р»РµРЅС‹ РёРјРµРЅР°. РђСЂС…РёРІ РїРµСЂРµРїРёСЃРѕРє РІ РѕР±С‰РµРј
+РґРѕСЃС‚СѓРїРµ РЅРµ РґРѕСЃС‚СѓРїРµРЅ РЅРµ Р±СѓРґРµС‚.
+Р‘СѓРґРµС‚ РґРѕСЃС‚СѓРїРЅРѕ РґРІР° СЃРїРёСЃРєР° СЃР»РѕРІ: СЃРѕРґРµСЂР¶Р°С‰РёС… РѕР±СЃС†РµРЅРЅСѓСЋ Р»РµРєСЃРёРєСѓ Рё С†РµРЅР·СѓСЂРёСЂРѕРІР°РЅРЅС‹Р№
 '''
 
 import os, re
@@ -31,7 +31,7 @@ class calc_word:
         
         file=open(url, 'r')
         _str=file.read()
-        res=re.findall(r'  <div class="message__header">Вы,(.+)</div>\n  <div>(.+)<div class="kludges"></div></div>', _str)
+        res=re.findall(r'  <div class="message__header">Р’С‹,(.+)</div>\n  <div>(.+)<div class="kludges"></div></div>', _str)
         if len(res)!=0:
             for i in res:
                 #print(i)
@@ -98,29 +98,41 @@ if __name__=='__main__':
     f=open('word_dict.txt', 'r')
     word_dict=f.read()
     f.close()
-    dict=enchant.Dict("ru_RU")
     word_dict=word_dict.split('\n')
+    dict=enchant.Dict("ru_RU")
+    try:
+        f=open('word_dict_new.txt', 'r')
+        word_dict_new=f.read()
+        f.close()
+        word_dict_new=word_dict_new.split('\n')
+    except:
+        word_dict_new=[]
     for i in word_dict:
-        if word_dict.index(i)<1273:
+        if word_dict.index(i)<4025 :
             continue
         if dict.check(i)==False:
             print(i+'\n')
+            print(word_dict.index(i), word_dict.index(i)/len(word_dict)*100)
             res=input()
             if res=='x':
                 print(word_dict.index(i))
                 break
-            elif res=='rem':
-                word_dict.remove(i)
+            elif res=='re':
+                print(word_dict.index(i))
                 continue
             elif res=='':
-                continue
+                print(word_dict.index(i))
+                word_dict_new.append(i)
             else:
                 print(word_dict.index(i))
-                word_dict.remove(i)
                 i=res
-                word_dict.append(i)
-    f=open('word_dict.txt', 'w')
-    for i in word_dict:
+                i=i.split(' ')
+                word_dict_new=word_dict_new+i
+        else:
+            word_dict_new.append(i)
+            
+    f=open('word_dict_new.txt', 'w')
+    for i in word_dict_new:
         f.write(i+'\n')
     f.close()
                 
