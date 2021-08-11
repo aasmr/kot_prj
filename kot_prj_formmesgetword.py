@@ -108,7 +108,7 @@ if __name__=='__main__':
     except:
         word_dict_new=[]
     for i in word_dict:
-        if word_dict.index(i)<22565:
+        if word_dict.index(i)<25152:
             continue
         if dict.check(i)==False:
             print(i+'\n')
