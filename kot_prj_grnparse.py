@@ -19,8 +19,17 @@ work e-mail: smirnov@bmstu.ru
 '''
 Данный файл предназначен для полученния букв и поиска слов"
 '''
-
-dict=enchant.Dict("ru_RU")
+class UsrDict():
+    def __init__(self, dict_path):
+        file=open(dict_path, 'r')
+        self.word_list=file.read()
+        self.word_list=self.word_list.split('\n')
+    #Проверка по пользовательскому словарю
+    def check(self, word):
+        if word in self.word_list:
+            return True
+        else:
+            return False
 
 def req(num, min, max):
     #делаем гет-запрос
@@ -41,7 +50,7 @@ def find_word(char_list):
         while len(word)<=15:
             if len(word)<i:
                 break
-            if dict.check(word):
+            if dict.check(word) or usr_dict.check(word):
                 #word_list.append(word)
                 flag=1
                 #break
@@ -60,21 +69,24 @@ def find_word(char_list):
             #cursor=cursor+i
             cursor+=1
     return word_list
-
-#char_list=req(10000, 97, 122)#в ASCII 97 - a, 122 - z
-#char_list=req(2000, 1072, 1103)#в ASCII 1072 - а, 1103 - я
-#f=open('char_list', 'wb')
-#pickle.dump(char_list, f)
-f=open('char_list', 'rb')
-big_list=pickle.load(f)
-f.close()
-char_list=[]
-for i in big_list:
-    char_list+=i
-char_list=[chr(i) for i in char_list]
-w_ls=find_word(char_list)
-f=open('word_list_i1reg', 'wb')
-pickle.dump(w_ls, f)
-f.close()
-#print(w_ls)
-#print(len(w_ls))
+if __name__=='__main__':
+    dict=enchant.Dict("ru_RU")
+    usr_dict=UsrDict('word_dict_obscene.txt')
+    #char_list=req(10000, 97, 122)#в ASCII 97 - a, 122 - z
+    #char_list=req(2000, 1072, 1103)#в ASCII 1072 - а, 1103 - я
+    #f=open('char_list', 'wb')
+    #pickle.dump(char_list, f)
+    f=open('char_list', 'rb')
+    big_list=pickle.load(f)
+    f.close()
+    char_list=[]
+    for i in big_list:
+        char_list+=i
+    char_list=[chr(i) for i in char_list]
+    w_ls=find_word(char_list)
+    #f=open('word_list_i1reg', 'wb')
+    f=open('word_list_i1obscene', 'wb')
+    pickle.dump(w_ls, f)
+    f.close()
+    #print(w_ls)
+    #print(len(w_ls))

@@ -20,11 +20,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
-    f=open('char_list', 'rb')
-    char_list=pickle.load(f)
-    f.close()
-    uniq_char, uniq_c_cnt= np.unique(char_list, return_counts=True)
-    uniq_char=[chr(i) for i in uniq_char]
+    """
     fig, ax = plt.subplots()
 
     ax.bar(uniq_char, uniq_c_cnt)
@@ -35,18 +31,39 @@ if __name__ == '__main__':
     fig.set_figheight(6)    #  высота Figure
 
     plt.show()
-    
+    """
     f=open('word_list_i1reg', 'rb')
     word_list=pickle.load(f)
     f.close()
-    f=open('char_list', 'rb')
-    char_list=pickle.load(f)
+    f=open('word_list_i1obscene', 'rb')
+    word_list_obscene=pickle.load(f)
     f.close()
     uniq_word, uniq_w_cnt= np.unique(word_list, return_counts=True)
+    uniq_word_obs, uniq_w_cnt_obs= np.unique(word_list_obscene, return_counts=True)
     print(len(uniq_w_cnt))
+    print(len(uniq_w_cnt_obs))
+    
+    
+    print('Обычный словарь\n-------------------')
+    for i in uniq_word:
+        if len(i)==5:
+            print(i)
+    print('\nНеобычный словарь\n-------------------')
+    for i in uniq_word_obs:
+        if len(i)==5:
+            print(i)
+    #Распределение слов по количеству букв в них
+    '''
     uniq_w_len=[]
     for i in uniq_word:
         uniq_w_len.append(len(i))
     print(uniq_w_len)
     print(np.unique(uniq_w_len, return_counts=True))
+    
+    uniq_w_len_obs=[]
+    for i in uniq_word_obs:
+        uniq_w_len_obs.append(len(i))
+    print(uniq_w_len_obs)
+    print(np.unique(uniq_w_len_obs, return_counts=True))
+    '''
         
