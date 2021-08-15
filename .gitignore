@@ -23,7 +23,9 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
+MANIFEST.
+. settings/
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -115,3 +117,5 @@ dmypy.json
 
 word_dict.txt
 word_dict_new.txt
+.pydevproject
+.project
