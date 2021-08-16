@@ -43,7 +43,29 @@ if __name__ == '__main__':
     print(len(uniq_w_cnt))
     print(len(uniq_w_cnt_obs))
     
+    f=open('word_dict_obscene.txt', 'r')
+    word=f.read()
+    word=word.split('\n')
+    word_str=''
+    for i in word:
+        word_str+=i
+    word_str=list(word_str)
+    word_str_unq, word_cnt_unq=np.unique(word_str, return_counts=True)
+    print(word_str_unq, word_cnt_unq)
     
+    fig, ax = plt.subplots()
+
+    ax.bar(word_str_unq, word_cnt_unq)
+
+    ax.set_facecolor('seashell')
+    fig.set_facecolor('floralwhite')
+    fig.set_figwidth(12)    #  ширина Figure
+    fig.set_figheight(6)    #  высота Figure
+
+    plt.show()
+    
+    #Печать слов различного состава
+    '''
     print('Обычный словарь\n-------------------')
     for i in uniq_word:
         if len(i)==5:
@@ -53,6 +75,7 @@ if __name__ == '__main__':
         if len(i)==5:
             print(i)
     #Распределение слов по количеству букв в них
+    '''
     '''
     uniq_w_len=[]
     for i in uniq_word:
